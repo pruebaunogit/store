@@ -140,6 +140,7 @@ function saveProduct(id) {
         title: found.title,
         price: found.price,
         image: found.images[0],
+        description: found.description,
         color: document.querySelector("#color").value,
         quantity: document.querySelector("#txt_cantidad").value,
     };

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tienda Virtual</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link id="estilosCSS" rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <div class="search">
+          <div class="logo">
+            <!-- <img src="assets/tiendamia-logo.svg" width="218" alt="Logo store" /> -->
+            <a class="logo" href="index.html">
+              <img
+                src="assets/tiendamia-logo.svg"
+                width="218"
+                alt="Logo store"
+              />
+            </a>
+          </div>
+          <div class="form">
+            <form>
+              <input id="search" type="text" placeholder="Search" />
+            </form>
+          </div>
+          <div class="social">
+            <ul>
+              <li><img src="assets/facebook.png" alt="facebook" /></li>
+              <li><img src="assets/instagram.png" alt="instagram" /></li>
+            </ul>
+          </div>
+        </div>
+        <div class="nav">
+          <ul id="nav"></ul>
+        </div>
+      </div>
+    </header>
+    <section id="hero">
+      <div class="container">
+        <div class="title-container">
+          <span>mi</span>
+          <span>Carrito</span>
+        </div>
+      </div>
+    </section>
+    <main>
+      <div class="container">
+        <div id="product-container-cart" class="product-container-cart">
+          <div id="container-items" class="container-items">
+            <article id="cartproducts" class="product-card-cart">
+              <img
+                class="product-img-cart"
+                src="assets/mock2.jpg"
+                alt="Macbook Pro"
+              />
+              <div class="product-info-cart">
+                <span class="product-title">Macbook Pro 15'4</span>
+                <span class="product-color"> Gray</span>
+                <div style="width: 100%; display: flex; align-items: center">
+                  <span style="margin-right: 10px; font-size: 20px"
+                    >Descripción</span
+                  >
+                  <p style="margin-left: auto">
+                    <span
+                      style="
+                        text-align: right;
+                        font-size: 20px;
+                        font-weight: bold;
+                      "
+                      >$750.000</span
+                    >
+                  </p>
+                </div>
+                <input
+                  type="number"
+                  id="cant-cart"
+                  class="product-cantidad"
+                  value="1"
+                />
+              </div>
+            </article>
+          </div>
+          <article id="total" class="product-total-cart">
+            <div class="checkout-container">
+              <p class="checkout-total-label">Resumen del pedido</p>
+              <div style="width: 100%; display: flex; align-items: center">
+                <span class="checkout-total-label">Total:</span>
+                <p style="margin-left: auto">
+                  <span id="txt-total-cart"
+                    style="
+                      text-align: right;
+                      font-size: 22px;
+                      font-weight: bold;
+                    "
+                    >$750.000</span
+                  >
+                </p>
+              </div>
+
+              <!-- <h2 id="checkout-total-price" class="checkout-total-price">100000</h2> -->
+              <p class="checkout-description">
+                Incluye impuesto PAIS y percepción AFIP. Podés recuperar AR$
+                50711 haciendo la solicitud en AFIP.
+              </p>
+              <div class="checkout-process">
+                <div class="top">
+                  <button id="btn_comprar" class="btn-primary">Comprar</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </main>
+    <div id="container-footer">
+      <!-- El contenido parcial se cargará aquí -->
+    </div>
+    <!-- <script src="scripts/products.js"></script> -->
+    <!-- <script src="scripts/productCards.js"></script> -->
+    <script src="scripts/layout.js"></script>
+    <script src="scripts/cart.js"></script>
+    <!-- <script src="scripts/filterProducts.js"></script> -->
+  </body>
+</html>
