@@ -16,15 +16,18 @@ function printDetails(id) {
         <img id="main-image" class="main-image" src="${product.images[0]} " alt="macbok img1" />
     </div>
     <div class="product-description-block">
-        <h1 class="title">${product.title}</h1>
-        <form class="selector">
-            <fieldset>
-                <label class="label" for="color">Color</label>
-                <select id="color" type="text" placeholder="Selecciona un color">
-                ${product.colors.map(
-        (each) => `<option value=${each}>${each}</option>`
-    ).join("")}
-                </select>
+        <h1 class="title">${product.title}</h1> 
+        <form class="product-selector">
+            <fieldset class="product-fieldset">
+            <label class="product-label" for="color">Color</label>
+            <select
+                class="product-select"
+                type="text"
+                placeholder="Selecciona un color"
+                id="color"
+            >
+            ${product.colors.map(color => `<option value="${color}">${color}</option>`).join('')}
+            </select>
             </fieldset>
         </form>
         <div style="width: 100%; display: flex; align-items: center;">
@@ -71,7 +74,7 @@ function printDetails(id) {
         <div class="checkout-process">
             <div class="top">
             <input id="txt_cantidad" type="number" value="1" onchange="changeSubtotal(this)"/>
-            <button id="btn_comprar" class="btn-primary">Comprar</button>
+            <!--<button id="btn_comprar" class="btn-primary">Comprar</button>-->
             </div>
             <div class="bottom">
             <button id="btn-add-cart" class="btn-outline">Añadir al Carrito</button>

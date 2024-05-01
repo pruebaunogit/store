@@ -193,6 +193,31 @@ main .columns-container {
 }
 
 
+.product-selector {
+    margin-top: 30px;
+}
+.product-fieldset {
+    border: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+.product-label {
+    color: black;
+    font-size: 12px;
+    font-weight: 700;
+}
+.product-select {
+    width: 100%;
+    height: 40px;
+    background: white;
+    border-radius: 10px;
+    border: 1px #eaeaea solid;
+    margin: 10px 0;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
 /*checkout-container  */
 .checkout-container {
     background-color: #ebebeb;
@@ -268,6 +293,7 @@ main .columns-container {
     border: none;
     height: 40px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .btn-outline {
@@ -277,6 +303,7 @@ main .columns-container {
     font-weight: bold;
     height: 40px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 
