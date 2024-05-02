@@ -284,6 +284,7 @@ footer .columns-container {
     padding: 40px;
     gap: 30px;    
     /* align-items: center; */
+    box-sizing: border-box;
 }
 .container-items{
     width: 60%;
@@ -291,22 +292,19 @@ footer .columns-container {
     background-color: #ebebeb;
     padding: 50px;
     flex-direction: column;
-}
-.product-card-cart{
-    /* width: 60%;
-    display: inherit;
-    background-color: #ebebeb;
     border-radius: 20px;
-    padding: 50px; */
-    width: 100%; 
-    display: inherit;
-    margin: 25px 0;
 }
 .product-total-cart{
     width: 39%;
     background-color: #ebebeb;
     border-radius: 20px;
 }
+.product-card-cart{ 
+    width: 100%; 
+    display: inherit;
+    margin: 25px 0;
+}
+
 .product-info-cart{
     width: 100%;
     margin-left: 20px;
@@ -389,9 +387,28 @@ footer .columns-container {
     .product-container {
         grid-template-columns: repeat(2, 1fr);
     } 
+    .product-container-cart{
+        width: 100%;
+        display: flex; 
+        flex-direction: column;
+    }
+    .container-items{
+        width: auto; 
+        padding: 10px 30px; 
+    }
+    .product-total-cart{
+        width: auto; 
+        padding: 10px 30px; 
+    }
+    .product-card-cart{ 
+        width: 100%; 
+        display: inherit;
+        margin: 25px 0;
+    }
+
 }
 
-@media (max-width: 425px) {
+@media (max-width: 426px) {
     header {
         padding: 30px 5%;
     }
@@ -423,5 +440,37 @@ footer .columns-container {
   
     footer .container {
         width: 230px;
+    }
+
+    .product-container-cart{
+        width: 100%;
+        display: flex; 
+        flex-direction: column;
+    }
+    .container-items{
+        width: auto; 
+        padding: 10px 30px; 
+    }
+    .product-total-cart{
+        width: auto; 
+        padding: 10px 30px; 
+    }
+    .product-card-cart{ 
+        width: 100%; 
+        display: inherit;
+        margin: 25px 0;
+        flex-direction: column;
+    }
+    .product-img-cart {
+        margin: 0 auto; 
+    }
+    .product-info-cart,.product-info-cart div,
+    .product-info-cart div span,
+    .product-info-cart div p,.product-cantidad{
+        margin: initial;
+        margin-top: 10px;
+    }
+    .checkout-container{
+        padding: 20px 0px;
     }
 }
