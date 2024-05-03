@@ -1,5 +1,5 @@
 
-const cartproducts = JSON.parse(localStorage.getItem("cart")) || [];
+let cartproducts = JSON.parse(localStorage.getItem("cart")) || [];
 console.table(cartproducts);
 
 const contendedorProductosCart = document.getElementById("container-items");
@@ -32,7 +32,7 @@ function createItem(product) {
                 <span style="text-align: right;font-size: 20px;font-weight: bold;" >${formatDinero(product.price)}</span>
             </p>
         </div> 
-        <input type="number"  class="product-cantidad" value="${ product.quantity}" />
+        <input id="${product.id}" type="number"  class="product-cantidad" value="${ product.quantity}" onchange="changeQuantity(event)"/>
         </div> 
     </article>
 
@@ -67,6 +67,25 @@ function formatDinero(monto = 0) {
         return 0;
     }
     return "S/ "+montoFormat;
+}
+ 
+function changeQuantity(e) {
+    let index = -1;
+    // buscar el producto en el array cartproducts con el id correspondiente
+    // let item = cartproducts.find((each) => each.id === e.target.id );
+    let item = cartproducts.find((item, i) => {
+        if (item.id === e.target.id) {
+            index = i;
+            return true; // Detiene la iteración
+        }
+    });
+    // al producto encontrado: modificar la cantidad
+    item.quantity = e.target.value
+    // actualizar los productos guardados en localStorage
+    cartproducts[index] = item
+    localStorage.setItem("cart", JSON.stringify(cartproducts));
+    console.table(JSON.parse(localStorage.getItem("cart")));
+    createTotalTemplate(cartproducts);
 }
 
 /* 

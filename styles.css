@@ -343,6 +343,11 @@ footer .columns-container {
     cursor: pointer;
     font-size: 22px;
 }
+#msj_no_hay_productos{
+    display: none; 
+    text-align: center;
+    min-height: 300px;
+}
 
 /* VISTA DE TABLET */
 

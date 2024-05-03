@@ -15,7 +15,10 @@
       href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
       rel="stylesheet"
     />
-
+    <script
+      src="https://kit.fontawesome.com/238b66aad4.js"
+      crossorigin="anonymous"
+    ></script>
     <link id="estilosCSS" rel="stylesheet" href="styles.css" />
   </head>
 
@@ -42,6 +45,7 @@
             <ul>
               <li><img src="assets/facebook.png" alt="facebook" /></li>
               <li><img src="assets/instagram.png" alt="instagram" /></li>
+              <li> <a href="cart.html" style="font-size: 20px; color: white; "> <i class="fa-solid fa-cart-shopping"></i></a></li> 
             </ul>
           </div>
         </div>
@@ -60,6 +64,7 @@
     </section>
     <main>
       <div class="container">
+        <div id="msj_no_hay_productos" > <h2 id="msj-n-h">No hay productos</h2></div>
         <div id="product-container-cart" class="product-container-cart">
           <div id="container-items" class="container-items">
             <article id="cartproducts" class="product-card-cart">
@@ -119,7 +124,7 @@
               </p>
               <div class="checkout-process">
                 <div class="top">
-                  <button id="btn_comprar" class="btn-primary">Comprar</button>
+                  <button id="btn_comprar" class="btn-primary">Finaliza tu compra</button>
                 </div>
               </div>
             </div>
@@ -130,10 +135,10 @@
     <div id="container-footer">
       <!-- El contenido parcial se cargará aquí -->
     </div>
-    <!-- <script src="scripts/products.js"></script> -->
-    <!-- <script src="scripts/productCards.js"></script> -->
+    
     <script src="scripts/layout.js"></script>
     <script src="scripts/cart.js"></script>
-    <!-- <script src="scripts/filterProducts.js"></script> -->
+    <script defer src="scripts/buy.js"></script>
+    
   </body>
 </html>
