@@ -4,8 +4,8 @@ const btn_click_comprar = document.getElementById("btn_comprar")
         cartproducts = [];
 
         // Borrar todos los productos del localStorage
-        // localStorage.removeItem("cart");
-        localStorage.clear();
+        localStorage.removeItem("cart");
+        // localStorage.clear();
 
         // actualizar la impresión de las tarjetas de productos del carrito (sin productos)
         // printItemsCart(cartproducts, "products");

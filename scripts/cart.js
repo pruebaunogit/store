@@ -1,9 +1,13 @@
 
 let cartproducts = JSON.parse(localStorage.getItem("cart")) || [];
-console.table(cartproducts);
+// console.table(cartproducts);
+
+let favoriteProducts = JSON.parse(localStorage.getItem("favoriteProducts")) || [];
+console.table(favoriteProducts);
 
 const contendedorProductosCart = document.getElementById("container-items");
 
+const contenedorFavoritos = document.getElementById("container-favoritos");
 
 function printItemsCart(arrayOfProducts, idSelector) {
     let productsTemplate = "";
@@ -33,7 +37,10 @@ function createItem(product) {
             </p>
         </div> 
         <input id="${product.id}" type="number"  class="product-cantidad" value="${ product.quantity}" onchange="changeQuantity(event)"/>
+        <button id="btn_favorito" data-value="${product.id}" onclick="addFavorito(${product.id})" class="btn-favorito">Agregar a Favoritos <i class="fa-regular fa-star"></i></button>
         </div> 
+
+        
     </article>
 
 
@@ -88,30 +95,70 @@ function changeQuantity(e) {
     createTotalTemplate(cartproducts);
 }
 
-/* 
-const found = products.find((each) => each.id === id);
-    const product = {
-        id: id,
-        title: found.title,
-        price: found.price,
-        image: found.images[0],
-        color: document.querySelector("#color").value,
-        quantity: document.querySelector("#txt_cantidad").value,
+function addFavorito(id) {
+    console.log(id); 
+
+    // const found = products.find((each) => each.id === id);
+    const fav_product = {
+        id: id
     };
 
     //obtener el cart
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let favoriteProducts = JSON.parse(localStorage.getItem("favoriteProducts")) || [];
     // Verificar si ya existe el carrito
-    if (cart && cart.length > 0) {
+    if (favoriteProducts && favoriteProducts.length > 0) {
         // Si el carrito existe, agregar el nuevo 
-        cart.push(product);
+        favoriteProducts.push(fav_product);
     } else {
         // Si el carrito no existe, crear uno nuevo
-        cart = [product];
+        favoriteProducts = [fav_product];
     }
 
     // const stringifyProduct = JSON.stringify(product);
     // localStorage.setItem("cart", stringifyProduct);
 
     // Guardar el carrito actualizado en localStorage
-    localStorage.setItem("cart", JSON.stringify(cart)); */
+    localStorage.setItem("favoriteProducts", JSON.stringify(favoriteProducts));
+  
+    // let favoriteProducts = JSON.parse(localStorage.getItem("favoriteProducts")) || [];
+    printFavorites();
+}
+
+function printFavorites() {
+    // debugger;
+    let arrayOfFavorites = JSON.parse(localStorage.getItem("favoriteProducts")) || [];
+
+    let favoriteTemplate = "";
+    for (const element of arrayOfFavorites) {
+        const item_fav = products.find((each) => each.id == element.id);
+        favoriteTemplate = favoriteTemplate + createItemFavorite(item_fav);
+    }
+    // const productsSelector = document.getElementById(idSelector);
+    contenedorFavoritos.innerHTML = favoriteTemplate;
+}
+
+function createItemFavorite(product) {
+    return ` 
+    <article class="product-card">
+        <a class="product-card" href="details.html">
+            <img
+            class="product-img"
+            src="${product.images[0]}"
+            alt="${product.id}"
+            />
+            <div class="product-info">
+            <span class="product-title">${product.title}</span>
+            <span class="product-description">${product.description}</span>
+            <div class="product-price-block">
+                <span class="price">${formatDinero(product.price)}</span>
+                <span class="discount">50% Off</span>
+            </div>
+            <div class="product-tax-policy">
+                Incluye impuesto País y percepción AFIP
+            </div>
+            </div>
+        </a>
+        </article> 
+    `;
+}
+printFavorites();
