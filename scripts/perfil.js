@@ -1,29 +1,36 @@
 let isOnline = false;
-
-localStorage.setItem("isOnline", isOnline)
+if (localStorage.getItem("isOnline") === "") {
+    localStorage.setItem("isOnline", isOnline)
+}
 
 // console.log(localStorage);
 
-const btn_logOn = document.getElementById("logOn");
-const btn_logOff = document.getElementById("logOff");
+export  function crearListenersPerfil() {
+    const btn_logOn = document.getElementById("logOn");
+    const btn_logOff = document.getElementById("logOff");
 
-btn_logOn.addEventListener("click",()=>{
-    console.log("inició sesión");
-    isOnline = true;
-    localStorage.setItem("isOnline", isOnline)
-    verificarLogin();
-})
+    btn_logOn.addEventListener("click", () => {
+        console.log("inició sesión");
+        isOnline = true;
+        localStorage.setItem("isOnline", isOnline)
+        verificarLogin();
+    })
 
-btn_logOff.addEventListener("click",()=>{
-    console.log("cerró sesión");
-    isOnline = false;
-    localStorage.setItem("isOnline", isOnline)
-    verificarLogin();
-})
-
-export default function verificarLogin() {
+    btn_logOff.addEventListener("click", () => {
+        console.log("cerró sesión");
+        isOnline = false;
+        localStorage.setItem("isOnline", isOnline)
+        verificarLogin();
+    })
+}
+function stringToBoolean(str) {
+    // Convertir el string a minúsculas y compararlo con "true"
+    return str.toLowerCase() === 'true';
+}
+export function verificarLogin() {
+    const verif_login = localStorage.getItem("isOnline");
     console.log("verific");
-    if (isOnline) {
+    if (stringToBoolean(verif_login)) {
         // ocultar el icono de "iniciar sesion"
         let elementosActivos = document.querySelectorAll('.isOffline');
         elementosActivos.forEach(function (elemento) {
@@ -50,30 +57,3 @@ export default function verificarLogin() {
 
     console.log(localStorage);
 }
-/* 
-const persona = {
-    nombre: 'Alex',
-    edad: 28,
-    correo: "alex@gmail.com",
-    altura: "1.65cm",
-    peso: "65kg",
-    hobbys: {
-        hobby1: "leer",
-        hobby2: "futbol",
-        hobby3: "montar bicicleta",
-    }
-};
-
-document.getElementById("nombre").textContent = "Nombre: " + persona.nombre;
-document.getElementById("edad").textContent = "Edad: " + persona.edad;
-document.getElementById("correo").textContent = "Correo: " + persona.correo;
-if (persona.edad >= 18) {
-    document.getElementById("altura").textContent = "Altura: " + persona.altura;
-    document.getElementById("peso").textContent = "Peso: " + persona.peso
-}
-
-let frutas = ["manzana", "banana", "naranja"];
-let [fruta1, fruta2, fruta3] = frutas; */
-// console.log(fruta1); // manzana
-// console.log(fruta2); // banana
-// console.log(fruta3); // naranja 

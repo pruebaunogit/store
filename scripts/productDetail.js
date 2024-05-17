@@ -1,13 +1,28 @@
-import {generarMenus} from './layout.js'  
-import {products} from './products.js'
+import { generarMenus } from './layout.js'
+// import {products} from './products.js' 
 import { formatDinero } from './utils.js';
-generarMenus() 
+generarMenus()
 const query = location.search;
 const params = new URLSearchParams(query);
 const id = params.get('id');
 // console.log(id);
+let products;
+async function loadProductDetails() {
+    try {
 
+        const productsResponse = await fetch('./data/products.json');
+        if (!productsResponse.ok) {
+            throw new Error('Failed to fetch product details');
+        }
+        // const products = await productsResponse.json();
+        products = await productsResponse.json();
+        printDetails(id)
+        crearListeners()
 
+    } catch (error) {
+        console.error('Error loading products:', error);
+    }
+}
 function printDetails(id) {
     const product = products.find((each) => each.id == id);
     // console.log(product)
@@ -91,13 +106,26 @@ function printDetails(id) {
     const detailsSelector = document.querySelector("#details");
     detailsSelector.innerHTML = detailsTemplate;
 }
-printDetails(id)
+// printDetails(id)
 
+function crearListeners() {
+    const txt_cantidad = document.getElementById("txt_cantidad")
+        .addEventListener("change", (event) => {
+            // console.log("aqui");
+            changeSubtotal(event);
+        });
 
-const miniimgs = document.querySelectorAll(".miniImg");
-miniimgs.forEach((mini)=> mini.addEventListener("click", (event)=>{
-    changeMini(event)
-}))
+    const btn_click_add = document.getElementById("btn-add-cart")
+        .addEventListener("click", () => {
+            // console.log("aqui");
+            saveProduct(id);
+        });
+    const miniimgs = document.querySelectorAll(".miniImg");
+    miniimgs.forEach((mini) => mini.addEventListener("click", (event) => {
+        changeMini(event)
+    }))
+}
+
 
 function changeMini(event) {
     // console.log("imagen mini");
@@ -113,23 +141,13 @@ function changeSubtotal(event) {
     const cant_prod = event.target.value >= 0 ? event.target.value : 0;
     const product = products.find((each) => each.id == id);
     const subTotal = product.price * cant_prod;
-    document.querySelector("#checkout-total-price").textContent =  formatDinero(subTotal);
+    document.querySelector("#checkout-total-price").textContent = formatDinero(subTotal);
 
 }
 
 
 
-const txt_cantidad = document.getElementById("txt_cantidad")
-    .addEventListener("change", (event) => {
-        // console.log("aqui");
-        changeSubtotal(event);
-    });
 
-const btn_click_add = document.getElementById("btn-add-cart")
-    .addEventListener("click", () => {
-        // console.log("aqui");
-        saveProduct(id);
-    });
 
 function saveProduct(id) {
     let index = -1;
@@ -156,34 +174,34 @@ function saveProduct(id) {
                 index = i;
                 return true; // Detiene la iteración
             }
-        }); 
-        if(item){
+        });
+        if (item) {
             console.log("aqui if");
             item.quantity = parseInt(item.quantity) + parseInt(document.querySelector("#txt_cantidad").value ?? 0);
             cart[index] = item
             localStorage.setItem("cart", JSON.stringify(cart));
             Swal.fire({
-                icon: 'warning',    
+                icon: 'warning',
                 text: "El producto ya se encuentra en el carrito de compras!!,\n se actualizó la cantidad",
             });
             return;
 
-        }else{
+        } else {
             console.log("aqui else");
             cart.push(product);
         }
-        
+
     } else {
         // Si el carrito no existe, crear uno nuevo
         cart = [product];
     }
-
-    // const stringifyProduct = JSON.stringify(product);
-    // localStorage.setItem("cart", stringifyProduct);
-
+ 
     // Guardar el carrito actualizado en localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
- 
+
     Swal.fire("se agregó el producto al carrito de compras");
 
 }
+
+
+loadProductDetails();

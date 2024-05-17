@@ -195,7 +195,7 @@ main .columns-container {
 #hero {
     /* border: 1px solid purple;
     height: 340px;     */
-    background-image: url("assets/hero_bg.png");
+    background-image: url("../assets/hero_bg.png");
     background-size: cover;
     background-position: top center;
 }

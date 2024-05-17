@@ -1,17 +1,26 @@
-import {products} from './products.js'
-import { formatDinero } from './utils.js';
-
+// import { products } from './products.js'
+import { formatDinero, limitar_descrip } from './utils.js';
 // let products = products;
 // Actividad: Renderizando los productos con un template string -  ***********// 
 const productsSelector = document.getElementById("products");
- 
-// Actividad: Renderizar los productos de forma dinámica  -- **************//
-/*  
-constructor(id, title, price, stock, images, onsale, supplier, colors, description) 
-const prod1 = new Product('1', 'Macbook Pro 15"4', 7500.00, 70, 
-['assets/mock1.jpg', 'assets/mock2.jpg', 'assets/mock1.jpg']
-, true, 'Apple',['gray','gold'],'Space Gray'); 
-*/
+
+
+async function loadProductDetails() {
+    try {
+
+        const productsResponse = await fetch('./data/products.json');
+        if (!productsResponse.ok) {
+            throw new Error('Failed to fetch product details');
+        }
+        const products = await productsResponse.json();
+        // renderProductDetails(products);
+        printCards(products, "products");
+        limitar_descrip();
+    } catch (error) {
+        console.error('Error loading products:', error);
+    }
+}
+
 function createCard(product) {
     return `
     <article class="product-card">
@@ -21,7 +30,7 @@ function createCard(product) {
                     <span class="product-title">${product.title}</span>
                     <span class="product-description">${product.description}</span>
                 <div class="product-price-block">
-                    <span class="price">${formatDinero(product.price) }</span>
+                    <span class="price">${formatDinero(product.price)}</span>
                     <span class="discount">50% Off</span>
                 </div>
                 <div class="product-tax-policy">
@@ -33,12 +42,6 @@ function createCard(product) {
     `;
 }
 
-/* let productsTemplate = "";
-for (const element of products) {
-    productsTemplate = productsTemplate + createCard(element)
-}
-
-productsSelector.innerHTML = productsTemplate; */
 
 // Actividad: Función de renderizado ---************//
 function printCards(arrayOfProducts, idSelector) {
@@ -51,6 +54,6 @@ function printCards(arrayOfProducts, idSelector) {
     productsSelector.innerHTML = productsTemplate;
 }
 
-printCards(products, "products");
+// printCards(products, "products");
 
-export {printCards}
+export { printCards, loadProductDetails }

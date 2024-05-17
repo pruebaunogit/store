@@ -1,38 +1,121 @@
-{
-    "productos": [
-        {
-            "id": 1,
-            "nombre": "Camiseta",
-            "precio": 19.99,
-            "descripcion": "Camiseta de algodón de alta calidad",
-            "imagen": "images/camiseta.png",
-            "categorias": [
-                "ropa",
-                "camisetas",
-                "algodon"
-            ]
-        },
-        {
-            "id": 2,
-            "nombre": "Zapatillas Deportivas",
-            "precio": 89.95,
-            "descripcion": "Zapatillas deportivas para todo tipo de terrenos",
-            "imagen": "images/zapatillas.png",
-            "categorias": [
-                "calzado",
-                "deportes"
-            ]
-        },
-        {
-            "id": 3,
-            "nombre": "Gorra",
-            "precio": 12.50,
-            "descripcion": "Gorra de lona con visera",
-            "imagen": "images/gorra.png",
-            "categorias": [
-                "accesorios",
-                "gorras"
-            ]
-        }
-    ]
-}
+[
+    {
+        "id": 1,
+        "title": "iPhone 13 Pro",
+        "price": 999,
+        "stock": 50,
+        "images": [
+            "./assets/iphone13pro.webp",
+            "./assets/iphone13pro2.webp",
+            "./assets/iphone13pro3.webp"
+        ],
+        "onsale": true,
+        "supplier": "Apple Inc.",
+        "colors": [
+            "Graphite",
+            "Silver",
+            "Gold",
+            "Sierra Blue"
+        ],
+        "description": "The iPhone 13 Pro is the latest flagship smartphone from Apple, featuring a stunning Super Retina XDR display, A15 Bionic chip, and advanced camera system."
+    },
+    {
+        "id": 2,
+        "title": "MacBook Pro 16-inch",
+        "price": 2399,
+        "stock": 30,
+        "images": [
+            "./assets/macbookpro16.webp",
+            "./assets/macbookpro162.webp",
+            "./assets/macbookpro163.webp"
+        ],
+        "onsale": false,
+        "supplier": "Apple Inc.",
+        "colors": [
+            "Space Gray",
+            "Silver"
+        ],
+        "description": "The MacBook Pro 16-inch is a powerful laptop designed for professionals, with a stunning Retina display, up to 64GB of memory, and a range of powerful processors."
+    },
+    {
+        "id": 3,
+        "title": "iPad Air",
+        "price": 599,
+        "stock": 60,
+        "images": [
+            "./assets/ipadair.webp",
+            "./assets/ipadair2.webp",
+            "./assets/ipadair3.webp"
+        ],
+        "onsale": true,
+        "supplier": "Apple Inc.",
+        "colors": [
+            "Space Gray",
+            "Silver",
+            "Rose Gold",
+            "Green",
+            "Sky Blue"
+        ],
+        "description": "The iPad Air offers a perfect balance of power and portability, featuring the powerful A14 Bionic chip, a beautiful Liquid Retina display, and support for the Apple Pencil."
+    },
+    {
+        "id": 4,
+        "title": "Apple Watch Series 8",
+        "price": 399,
+        "stock": 40,
+        "images": [
+            "./assets/applewatchseries8.webp",
+            "./assets/applewatchseries82.webp",
+            "./assets/applewatchseries83.webp"
+        ],
+        "onsale": false,
+        "supplier": "Apple Inc.",
+        "colors": [
+            "Midnight",
+            "Starlight",
+            "Green",
+            "Blue",
+            "Product(RED)"
+        ],
+        "description": "The Apple Watch Series 8 is the ultimate device for a healthy life, with advanced health features, a larger and brighter display, and a range of stylish bands."
+    },
+    {
+        "id": 5,
+        "title": "AirPods Pro",
+        "price": 249,
+        "stock": 80,
+        "images": [
+            "./assets/airpodspro.webp",
+            "./assets/airpodspro2.webp",
+            "./assets/airpodspro3.webp"
+        ],
+        "onsale": true,
+        "supplier": "Apple Inc.",
+        "colors": [
+            "White"
+        ],
+        "description": "AirPods Pro deliver Active Noise Cancellation for immersive sound, transparency mode for hearing the world around you, and a customizable fit for all-day comfort."
+    },
+    {
+        "id": 6,
+        "title": "iMac 24-inch",
+        "price": 1299,
+        "stock": 25,
+        "images": [
+            "./assets/imac24.webp",
+            "./assets/imac242.webp",
+            "./assets/imac243.webp"
+        ],
+        "onsale": false,
+        "supplier": "Apple Inc.",
+        "colors": [
+            "Blue",
+            "Green",
+            "Pink",
+            "Silver",
+            "Yellow",
+            "Orange"
+        ],
+        "description": "The iMac 24-inch features a stunning 4.5K Retina display, powerful M1 chip, and a range of vibrant colors to brighten up any workspace."
+    }
+]

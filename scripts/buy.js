@@ -24,25 +24,7 @@ const btn_click_comprar = document.getElementById("btn_comprar")
                 Swal.fire("Changes are not saved", "", "info");
             } */
         });
-
-        // borrar todos los productos del array cartproducts
-        // cartproducts = [];
-        // cartproducts.length = 0;
-
-        // Borrar todos los productos del localStorage
-        // localStorage.removeItem("cart");
-        // localStorage.clear();
-
-        // actualizar la impresión de las tarjetas de productos del carrito (sin productos)
-        // printItemsCart(cartproducts, "products");
-        // actualizar la impresión del cuadro de detalle del total (sumando cero)
-        // createTotalTemplate(cartproducts);
-
-        // Condiciona el renderizado de la vista para que informe al usuario que no hay productos en el carrito cuando efectivamente no hay productos en el localStorage.
-
-        
-        // verificarProductos();
-        // verificarProductos();
+ 
     })
 
 export function verificarProductos() {
@@ -54,5 +36,4 @@ export function verificarProductos() {
         document.getElementById("msj_no_hay_productos").style.display = 'none';
         document.getElementById("product-container-cart").style.display = 'inline-flex';
     }
-}
-// verificarProductos();
+} 

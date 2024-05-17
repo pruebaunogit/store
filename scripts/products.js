@@ -193,4 +193,4 @@ const products = [
         "The iMac 24-inch features a stunning 4.5K Retina display, powerful M1 chip, and a range of vibrant colors to brighten up any workspace."
     )
 ];
-export { products };
+// export { products };

@@ -1,7 +1,7 @@
-import {generarMenus} from './layout.js' 
-import { products } from './products.js'
+import { generarMenus } from './layout.js'
+// import { products } from './products.js'
 import { verificarProductos } from './buy.js'
-import { formatDinero } from './utils.js';
+import { formatDinero, limitar_descrip } from './utils.js';
 generarMenus();
 
 
@@ -16,6 +16,24 @@ console.table(favoriteProducts);
 const contendedorProductosCart = document.getElementById("container-items");
 
 const contenedorFavoritos = document.getElementById("container-favoritos");
+
+loadProductDetails()
+let products;
+async function loadProductDetails() {
+    try {
+
+        const productsResponse = await fetch('./data/products.json');
+        if (!productsResponse.ok) {
+            throw new Error('Failed to fetch product details');
+        }
+        // const products = await productsResponse.json();
+        products = await productsResponse.json();
+        printFavorites();
+        limitar_descrip()
+    } catch (error) {
+        console.error('Error loading products:', error);
+    }
+}
 
 function printItemsCart(arrayOfProducts, idSelector) {
     let productsTemplate = "";
@@ -97,15 +115,16 @@ function changeQuantity(e) {
     createTotalTemplate(cartproducts);
 
     Swal.fire({
-        text:"Cantidad modificada",
+        text: "Cantidad modificada",
+        icon: 'success',
         toast: true,
         timer: 3000,
         background: 'green',
         color: 'white',
         position: 'top-end',
-        showConfirmButton:false
+        showConfirmButton: false
     });
-    
+
 
 }
 
@@ -188,6 +207,6 @@ function createItemFavorite(product) {
         </article> 
     `;
 }
-printFavorites();
+// printFavorites();
 
 export { cartproducts }

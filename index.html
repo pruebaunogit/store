@@ -20,15 +20,14 @@
       crossorigin="anonymous"
     ></script>
 
-    <link id="estilosCSS" rel="stylesheet" href="styles.css" />
+    <link id="estilosCSS" rel="stylesheet" href="./css/styles.css" />
   </head>
 
   <body>
     <header>
-      <div class="container">
-        <div class="search">
+      <div class="container container-header">
+        <!-- <div class="search">
           <div class="logo">
-            <!-- <img src="assets/tiendamia-logo.svg" width="218" alt="Logo store" /> -->
             <a class="logo" href="index.html">
               <img
                 src="assets/tiendamia-logo.svg"
@@ -39,28 +38,34 @@
           </div>
           <div class="form">
             <form>
-              <input  id="search" type="text" placeholder="Search" />
+              <input id="search" type="text" placeholder="Search" />
             </form>
           </div>
           <div class="social">
-            <style>
-              .isOnline{
-                display: none;
-              }
-            </style>
             <ul>
               <li><img src="assets/facebook.png" alt="facebook" /></li>
               <li><img src="assets/instagram.png" alt="instagram" /></li>
-              <li class="isOnline"> <a href="cart.html" style="font-size: 20px; color: white; "> <i class="fa-solid fa-cart-shopping"></i>Cart</a></li> 
-              <li class="isOffline"> <a href="#" id="logOn" style="font-size: 20px; color: white; "> <i class="fa-solid fa-circle-user"></i>Login</a></li> 
-              <li class="isOnline"> <a href="#" id="logOff" style="font-size: 20px; color: white; "> <i class="fa-solid fa-user-check"></i>Logout</a></li> 
-                </ul>
+              <li class="isOnline">
+                <a href="cart.html" style="font-size: 20px; color: white">
+                  <i class="fa-solid fa-cart-shopping"></i
+                ></a>
+              </li>
+              <li class="isOffline">
+                <a href="#" id="logOn" style="font-size: 20px; color: white">
+                  <i class="fa-solid fa-circle-user"></i
+                ></a>
+              </li>
+              <li class="isOnline">
+                <a href="#" id="logOff" style="font-size: 20px; color: white">
+                  <i class="fa-solid fa-user-check"></i
+                ></a>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="nav">
-          <ul id="nav"> 
-          </ul>
-        </div>
+          <ul id="nav"></ul>
+        </div> -->
       </div>
     </header>
     <section id="hero">
@@ -73,15 +78,12 @@
     </section>
     <main>
       <div class="container">
-        <div class="product-container"  id="products" >
-           
-        </div>
+        <div class="product-container" id="products"></div>
       </div>
-    </main> 
+    </main>
     <div id="container-footer">
       <!-- El contenido parcial se cargará aquí -->
     </div>
     <script type="module" src="main.js"></script>
-    
   </body>
 </html>
