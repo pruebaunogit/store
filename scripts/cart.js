@@ -1,7 +1,15 @@
+import {generarMenus} from './layout.js' 
+import { products } from './products.js'
+import { verificarProductos } from './buy.js'
+import { formatDinero } from './utils.js';
+generarMenus();
+
 
 let cartproducts = JSON.parse(localStorage.getItem("cart")) || [];
 // console.table(cartproducts);
-
+if (cartproducts) {
+    verificarProductos();
+}
 let favoriteProducts = JSON.parse(localStorage.getItem("favoriteProducts")) || [];
 console.table(favoriteProducts);
 
@@ -31,13 +39,13 @@ function createItem(product) {
         <span class="product-title">${product.title}</span> 
         <span class="product-color"> ${product.color}</span>
         <div style="width: 100%; display: flex; align-items: center;">
-            <span style="margin-right: 10px;font-size: 20px;">${product.description}</span>
+            <span style="margin-right: 10px;font-size: 20px;"> </span>
             <p style="margin-left: auto;">
                 <span style="text-align: right;font-size: 20px;font-weight: bold;" >${formatDinero(product.price)}</span>
             </p>
         </div> 
-        <input id="${product.id}" type="number"  class="product-cantidad" value="${ product.quantity}" onchange="changeQuantity(event)"/>
-        <button id="btn_favorito" data-value="${product.id}" onclick="addFavorito(${product.id})" class="btn-favorito">Agregar a Favoritos <i class="fa-regular fa-star"></i></button>
+        <input id="${product.id}" type="number"  class="product-cantidad" value="${product.quantity}"  "/>
+        <button id="btn_favorito${product.id}"  class="btn-favorito" data-value="${product.id}" >Agregar a Favoritos <i class="fa-regular fa-star"></i></button>
         </div> 
 
         
@@ -48,34 +56,28 @@ function createItem(product) {
 }
 createTotalTemplate(cartproducts);
 function createTotalTemplate(arrayOfProducts) {
-    let total = 0;
+    /* let total = 0;
     arrayOfProducts.forEach(
         (each) => (total = total + each.price * each.quantity)
+    ); */
+    const suma_total = arrayOfProducts.reduce(
+        (acc, current) => acc + current.price * current.quantity,
+        0
     );
-    // total = new Intl.NumberFormat("pe-PE", { style: "currency", currency: "PEN" }).format(
-    //     total,
-    //   );
-    document.getElementById("txt-total-cart").textContent =  formatDinero(total);
-
-    // return `
-    //     <h4 class="total-title"> Resumen del pedido </h4>
-    //     <p class="total-p">Subtotal $ ${total}</p>
-    //     <button id="buy" type="button">COMPRAR</button>
-    // `;
+    document.getElementById("txt-total-cart").textContent = formatDinero(suma_total);
 }
 
-function formatDinero(monto = 0) {
-    let montoFormat = 0;
-    if( monto >=0){
-        montoFormat =  new Intl.NumberFormat("pe-PE", { style: "currency", currency: "PEN" }).format(
-            monto,
-          );
-    }else{
-        return 0;
-    }
-    return "S/ "+montoFormat;
-}
- 
+
+
+const cantidad_selectores = document.querySelectorAll('.product-cantidad');
+cantidad_selectores.forEach((selector) => {
+    selector.addEventListener("change", (event) => {
+        // console.log(event.target.dataset);
+        return changeQuantity(event)
+        // return addFavorito(event.target.dataset.value)
+    })
+})
+
 function changeQuantity(e) {
     let index = -1;
     // buscar el producto en el array cartproducts con el id correspondiente
@@ -93,10 +95,30 @@ function changeQuantity(e) {
     localStorage.setItem("cart", JSON.stringify(cartproducts));
     console.table(JSON.parse(localStorage.getItem("cart")));
     createTotalTemplate(cartproducts);
+
+    Swal.fire({
+        text:"Cantidad modificada",
+        toast: true,
+        timer: 3000,
+        background: 'green',
+        color: 'white',
+        position: 'top-end',
+        showConfirmButton:false
+    });
+    
+
 }
 
+
+const favoritos_selectores = document.querySelectorAll('.btn-favorito');
+favoritos_selectores.forEach((selector) => {
+    selector.addEventListener("click", (event) => {
+        // console.log(event.target.dataset);
+        return addFavorito(event.target.dataset.value)
+    })
+})
+
 function addFavorito(id) {
-    console.log(id); 
 
     // const found = products.find((each) => each.id === id);
     const fav_product = {
@@ -119,9 +141,10 @@ function addFavorito(id) {
 
     // Guardar el carrito actualizado en localStorage
     localStorage.setItem("favoriteProducts", JSON.stringify(favoriteProducts));
-  
+
     // let favoriteProducts = JSON.parse(localStorage.getItem("favoriteProducts")) || [];
     printFavorites();
+    alert("Se agregó a favoritos")
 }
 
 function printFavorites() {
@@ -129,9 +152,13 @@ function printFavorites() {
     let arrayOfFavorites = JSON.parse(localStorage.getItem("favoriteProducts")) || [];
 
     let favoriteTemplate = "";
-    for (const element of arrayOfFavorites) {
+    arrayOfFavorites.sort((a, b) => b.id - a.id);
+    // for (const element of arrayOfFavorites) {
+    for (let i = Math.min(arrayOfFavorites.length, 3) - 1; i >= 0; i--) {
+        const element = arrayOfFavorites[i];
         const item_fav = products.find((each) => each.id == element.id);
         favoriteTemplate = favoriteTemplate + createItemFavorite(item_fav);
+
     }
     // const productsSelector = document.getElementById(idSelector);
     contenedorFavoritos.innerHTML = favoriteTemplate;
@@ -140,7 +167,7 @@ function printFavorites() {
 function createItemFavorite(product) {
     return ` 
     <article class="product-card">
-        <a class="product-card" href="details.html">
+        <a   href="details.html">
             <img
             class="product-img"
             src="${product.images[0]}"
@@ -162,3 +189,5 @@ function createItemFavorite(product) {
     `;
 }
 printFavorites();
+
+export { cartproducts }

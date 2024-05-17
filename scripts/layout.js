@@ -27,15 +27,40 @@ const options = [
     { title: "Mis pedidos", linkTo: "./orders.html", opts: ["Pedir nuevamente", "Lista de deseos"] },
     { title: "Garantía", linkTo: "./warranty.html", opts: [] },
 ];
+async function loadData() {
+    try {
+        const response = await fetch('./data/options.json');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
+let jsonData;
+// Función para cargar la data y asignarla a la constante global usando async/await
+async function generarMenus() {
+    try {
+        jsonData = await loadData();
+        // console.log(jsonData); // Acceso a la data dentro de la función
+        render_nav_menu(jsonData);
+        cargarFooterHTML(jsonData);
+    } catch (error) {
+        console.error('Error al cargar el archivo JSON:', error);
+    }
+}
+// generarMenus();
+// console.log(jsonData);
 
 // Itera con for of, de manera que cada iteración:
-{/* <a href="#" class="nav-button" >Ofertas de la semana</a> */}
-for (let option of options) {
-    const anchor = document.createElement("a"); //Crea las etiquetas correspondientes con el método createElement 
-    anchor.className = "nav-button"; // y las propiedades/estilos correspondientes.
-    anchor.textContent = option.title; // Asigna el texto de la propiedad title de cada objeto con la propiedad textContent
-    anchor.href = option.linkTo; // Define la propiedad href hacia la propiedad linkTo de cada objeto.
-    navSelector.appendChild(anchor); // Luego “agregar un hijo”  al navSelector
+/* <a href="#" class="nav-button" >Ofertas de la semana</a> */
+const render_nav_menu = (options) => {
+    for (let option of options) {
+        const anchor = document.createElement("a"); //Crea las etiquetas correspondientes con el método createElement 
+        anchor.className = "nav-button"; // y las propiedades/estilos correspondientes.
+        anchor.textContent = option.title; // Asigna el texto de la propiedad title de cada objeto con la propiedad textContent
+        anchor.href = option.linkTo; // Define la propiedad href hacia la propiedad linkTo de cada objeto.
+        navSelector.appendChild(anchor); // Luego “agregar un hijo”  al navSelector
+    }
 }
 
 
@@ -104,7 +129,7 @@ function crearMenuFooter() {
     }
 }
 
-function crearMenuFooter2() {
+function crearMenuFooter2(options) {
     const footerSelector = document.querySelector("#footer");
 
     for (let option of options) {
@@ -142,19 +167,22 @@ function crearListItem(texto, enlace) {
 
 // crearMenuFooter2();
 
-function cargarFooterHTML() { 
+function cargarFooterHTML(options) {
     // Utilizando Fetch API para cargar el contenido del partial.html
     fetch('partialFooter.html')
         .then(response => response.text())
         .then(data => {
             // Insertar el contenido del partial en el div con ID 'container'
             document.getElementById('container-footer').innerHTML = data;
-            crearMenuFooter2();
+            crearMenuFooter2(options);
         })
         .catch(error => {
             console.error('Error al cargar el contenido parcial:', error);
-        }); 
-    
+        });
+
 }
 
-cargarFooterHTML();
+// cargarFooterHTML();
+
+
+export { generarMenus }

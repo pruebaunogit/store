@@ -306,6 +306,10 @@ main .columns-container {
     cursor: pointer;
 }
 
+.btn-outline:hover {
+    background-color: #ff3b3c;
+    color: white;
+}
 
 /*CARDS*/
 .sales-block {

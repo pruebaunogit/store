@@ -1,16 +1,21 @@
+import {generarMenus} from './layout.js'  
+import {products} from './products.js'
+import { formatDinero } from './utils.js';
+generarMenus() 
 const query = location.search;
 const params = new URLSearchParams(query);
 const id = params.get('id');
 // console.log(id);
 
+
 function printDetails(id) {
-    const product = products.find((each) => each.id === id);
+    const product = products.find((each) => each.id == id);
     // console.log(product)
     const detailsTemplate = `
     <div class="product-images-block">
         <div class="thumbnail-container"> 
             ${product.images.map(
-        each => `<img class="miniImg" src="${each}" alt="mini" onclick="changeMini(event)"/>`
+        each => `<img class="miniImg" src="${each}" alt="mini" />`
     ).join("")} 
         </div>
         <img id="main-image" class="main-image" src="${product.images[0]} " alt="macbok img1" />
@@ -33,7 +38,7 @@ function printDetails(id) {
         <div style="width: 100%; display: flex; align-items: center;">
             <h2 style="margin-right: 10px;">Precio:</h2>
             <p style="margin-left: auto;">
-                <span style="text-align: right;">${"$" + product.price}</span>
+                <span style="text-align: right;">${formatDinero(product.price)}</span>
             </p>
         </div>
         <div class="description">
@@ -46,7 +51,7 @@ function printDetails(id) {
     <div class="product-checkout-block">
         <div class="checkout-container">
         <span class="checkout-total-label">Total:</span>
-        <h2 id="checkout-total-price" class="checkout-total-price">${"$" + product.price}</h2>
+        <h2 id="checkout-total-price" class="checkout-total-price">${formatDinero(product.price)}</h2>
         <p class="checkout-description">
             Incluye impuesto PAIS y percepción AFIP. Podés recuperar AR$
             50711 haciendo la solicitud en AFIP.
@@ -73,7 +78,7 @@ function printDetails(id) {
         </ul>
         <div class="checkout-process">
             <div class="top">
-            <input id="txt_cantidad" type="number" value="1" onchange="changeSubtotal(this)"/>
+            <input id="txt_cantidad" type="number" value="1"  />
             <!--<button id="btn_comprar" class="btn-primary">Comprar</button>-->
             </div>
             <div class="bottom">
@@ -89,6 +94,11 @@ function printDetails(id) {
 printDetails(id)
 
 
+const miniimgs = document.querySelectorAll(".miniImg");
+miniimgs.forEach((mini)=> mini.addEventListener("click", (event)=>{
+    changeMini(event)
+}))
+
 function changeMini(event) {
     // console.log("imagen mini");
     const selectedSrc = event.target.src;
@@ -97,15 +107,23 @@ function changeMini(event) {
     bigSelector.src = selectedSrc;
 }
 
-function changeSubtotal(c) {
+function changeSubtotal(event) {
     // console.log(c.value);
     // console.log(c);
-    const cant_prod = c.value >= 0 ? c.value : 0;
-    const product = products.find((each) => each.id === id);
+    const cant_prod = event.target.value >= 0 ? event.target.value : 0;
+    const product = products.find((each) => each.id == id);
     const subTotal = product.price * cant_prod;
-    document.querySelector("#checkout-total-price").textContent = "$" + subTotal;
+    document.querySelector("#checkout-total-price").textContent =  formatDinero(subTotal);
 
 }
+
+
+
+const txt_cantidad = document.getElementById("txt_cantidad")
+    .addEventListener("change", (event) => {
+        // console.log("aqui");
+        changeSubtotal(event);
+    });
 
 const btn_click_add = document.getElementById("btn-add-cart")
     .addEventListener("click", () => {
@@ -114,27 +132,8 @@ const btn_click_add = document.getElementById("btn-add-cart")
     });
 
 function saveProduct(id) {
-    const found = products.find((each) => each.id === id);
-    // console.log(found);
-    const product = {
-        id: id,
-        title: found.title,
-        price: found.price,
-        image: found.images[0],
-        // color: document.querySelector("#color-" + id).value,
-        color: document.querySelector("#color").value,
-        // quantity: document.querySelector("#quantity-" + id).value,
-        quantity: document.querySelector("#txt_cantidad").value,
-    };
-    const stringifyProduct = JSON.stringify(product);
-    // console.log(stringifyProduct);
-    localStorage.setItem("cart", stringifyProduct);
-    // console.log(localStorage.getItem("cart"));
-
-}
-
-function saveProduct(id) {
-    const found = products.find((each) => each.id === id);
+    let index = -1;
+    const found = products.find((each, i) => each.id == id);
     const product = {
         id: id,
         title: found.title,
@@ -147,10 +146,33 @@ function saveProduct(id) {
 
     //obtener el cart
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    console.table(cart);
     // Verificar si ya existe el carrito
     if (cart && cart.length > 0) {
-        // Si el carrito existe, agregar el nuevo 
-        cart.push(product);
+        let index = -1;
+        // Si el carrito existe, agregar o modificar el producto
+        let item = cart.find((item, i) => {
+            if (item.id === id) {
+                index = i;
+                return true; // Detiene la iteración
+            }
+        }); 
+        if(item){
+            console.log("aqui if");
+            item.quantity = parseInt(item.quantity) + parseInt(document.querySelector("#txt_cantidad").value ?? 0);
+            cart[index] = item
+            localStorage.setItem("cart", JSON.stringify(cart));
+            Swal.fire({
+                icon: 'warning',    
+                text: "El producto ya se encuentra en el carrito de compras!!,\n se actualizó la cantidad",
+            });
+            return;
+
+        }else{
+            console.log("aqui else");
+            cart.push(product);
+        }
+        
     } else {
         // Si el carrito no existe, crear uno nuevo
         cart = [product];
@@ -161,5 +183,7 @@ function saveProduct(id) {
 
     // Guardar el carrito actualizado en localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
+ 
+    Swal.fire("se agregó el producto al carrito de compras");
 
 }

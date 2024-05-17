@@ -1,0 +1,38 @@
+{
+    "productos": [
+        {
+            "id": 1,
+            "nombre": "Camiseta",
+            "precio": 19.99,
+            "descripcion": "Camiseta de algodón de alta calidad",
+            "imagen": "images/camiseta.png",
+            "categorias": [
+                "ropa",
+                "camisetas",
+                "algodon"
+            ]
+        },
+        {
+            "id": 2,
+            "nombre": "Zapatillas Deportivas",
+            "precio": 89.95,
+            "descripcion": "Zapatillas deportivas para todo tipo de terrenos",
+            "imagen": "images/zapatillas.png",
+            "categorias": [
+                "calzado",
+                "deportes"
+            ]
+        },
+        {
+            "id": 3,
+            "nombre": "Gorra",
+            "precio": 12.50,
+            "descripcion": "Gorra de lona con visera",
+            "imagen": "images/gorra.png",
+            "categorias": [
+                "accesorios",
+                "gorras"
+            ]
+        }
+    ]
+}

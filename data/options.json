@@ -1,0 +1,7 @@
+[
+    { "title": "Ofertas de la semana", "linkTo": "./outlet.html", "opts": ["Laptops", "Audio", "Auticulares"] },
+    { "title": "Cómo comprar", "linkTo": "./how.html", "opts": ["Formas de pago", "Envios", "Devoluciones"] },
+    { "title": "Costos y tarifas", "linkTo": "./taxs.html", "opts": ["Impuestos", "Facturación"] },
+    { "title": "Mis pedidos", "linkTo": "./orders.html", "opts": ["Pedir nuevamente", "Lista de deseos"] },
+    { "title": "Garantía", "linkTo": "./warranty.html", "opts": [] }
+]
