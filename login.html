@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Tienda Mia</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <div class="head"><img src="./assets/tiendamia-logo.svg" alt="head-logo"></div>
+    <div class="wrapper">
+        <div class="card-switch">
+            <label class="switch">
+               <input class="toggle" type="checkbox">
+               <span class="slider"></span>
+               <span class="card-side"></span>
+               <div class="flip-card__inner">
+                  <div class="flip-card__front">
+                     <div class="title">Ingresar</div>
+                     <form  action="index.html" id="login_form" method="post" class="flip-card__form">
+                        <input type="email" placeholder="Email" id="email" name="email" class="flip-card__input" required>
+                        <input type="password" placeholder="Contraseña" id="password" name="password" class="flip-card__input" required>
+                        <a href="#">¿Olvidaste tu contraseña?</a>
+                        <button class="flip-card__btn" type="submit">Ingresar</button>
+                        <p>
+                            * Al <strong> ingresar</strong> con Facebook o Google estás aceptando recibir ofertas
+                            por
+                            email
+                        </p>
+                        <p>
+                            Tiendamia está protegida por reCAPTCHA y se aplican la
+                            
+                        <a href="#">Política de Privacidad</a> y los
+                        <a href="#">Términos de Servicio de Google</a>.
+                        </p>
+                     </form>
+                  </div>
+                  <div class="flip-card__back">
+                     <div class="title">Regístrate</div>
+                     <form action="login.html" id="register_form" method="post" class="flip-card__form">
+                        <!-- <input type="name" placeholder="Name" class="flip-card__input"> -->
+                        <input type="email" placeholder="Email" id="email2" name="email" class="flip-card__input">
+                        <input type="password" placeholder="Contraseña" id="password2" name="password" class="flip-card__input">
+                        <p>(?) La contraseña debe tener al menos 6 caracteres.</p>
+                        <div class="checkbox">
+                            <input type="checkbox" id="offers" name="offers" />
+                            <label for="offers">Recibir Ofertas!</label>
+                        </div>
+                        <button type="submit" class="flip-card__btn">Regístrate</button> 
+                        <p>
+                            Al <strong> registrarte </strong>estás aceptando nuestros
+                            <a href="#">Términos y Condiciones</a> y nuestras
+                            <a href="#">Políticas de Privacidad</a>.
+                        </p>
+                        <p>
+                            Tiendamia está protegida por reCAPTCHA y se aplican la
+                            <a href="#">Política de Privacidad</a> y los
+                            <a href="#">Términos de Servicio de Google</a>.
+                        </p>
+                        
+                     </form>
+                  </div>
+               </div>
+            </label>
+        </div>   
+   </div>
+
+   <script type="module" src="./scripts/auth.js"></script>
+  </body>
+</html>

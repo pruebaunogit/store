@@ -1,25 +1,27 @@
-let isOnline = false;
+/* let isOnline = false;
 if (localStorage.getItem("isOnline") === "") {
     localStorage.setItem("isOnline", isOnline)
-}
+} */
 
 // console.log(localStorage);
+import { verifOnline, cerrarSesion } from "./users.js";
 
 export  function crearListenersPerfil() {
     const btn_logOn = document.getElementById("logOn");
     const btn_logOff = document.getElementById("logOff");
 
     btn_logOn.addEventListener("click", () => {
-        console.log("inició sesión");
-        isOnline = true;
-        localStorage.setItem("isOnline", isOnline)
+        // console.log("inició sesión");
+        // isOnline = true;
+        // localStorage.setItem("isOnline", isOnline)
         verificarLogin();
     })
 
     btn_logOff.addEventListener("click", () => {
-        console.log("cerró sesión");
-        isOnline = false;
-        localStorage.setItem("isOnline", isOnline)
+        // console.log("cerró sesión");
+        cerrarSesion();
+        // isOnline = false;
+        // localStorage.setItem("isOnline", isOnline)
         verificarLogin();
     })
 }
@@ -28,9 +30,11 @@ function stringToBoolean(str) {
     return str.toLowerCase() === 'true';
 }
 export function verificarLogin() {
-    const verif_login = localStorage.getItem("isOnline");
-    console.log("verific");
-    if (stringToBoolean(verif_login)) {
+    // const verif_login = localStorage.getItem("isOnline");
+    const verif_login = verifOnline()
+    // console.log("verific");
+    // if (stringToBoolean(verif_login)) {
+    if (verif_login) {
         // ocultar el icono de "iniciar sesion"
         let elementosActivos = document.querySelectorAll('.isOffline');
         elementosActivos.forEach(function (elemento) {
@@ -55,5 +59,5 @@ export function verificarLogin() {
         });
     }
 
-    console.log(localStorage);
+    // console.log(localStorage);
 }

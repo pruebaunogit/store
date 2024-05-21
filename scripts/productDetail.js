@@ -1,6 +1,7 @@
 import { generarMenus } from './layout.js'
 // import {products} from './products.js' 
 import { formatDinero } from './utils.js';
+import { verifOnline } from "./users.js";
 generarMenus()
 const query = location.search;
 const params = new URLSearchParams(query);
@@ -117,8 +118,12 @@ function crearListeners() {
 
     const btn_click_add = document.getElementById("btn-add-cart")
         .addEventListener("click", () => {
-            // console.log("aqui");
-            saveProduct(id);
+            let verif_isOnline = verifOnline();
+            if(verif_isOnline){
+                saveProduct(id);
+            }else{
+                Swal.fire("Debe de iniciar sesión ", "", "error")
+            }
         });
     const miniimgs = document.querySelectorAll(".miniImg");
     miniimgs.forEach((mini) => mini.addEventListener("click", (event) => {
@@ -176,7 +181,6 @@ function saveProduct(id) {
             }
         });
         if (item) {
-            console.log("aqui if");
             item.quantity = parseInt(item.quantity) + parseInt(document.querySelector("#txt_cantidad").value ?? 0);
             cart[index] = item
             localStorage.setItem("cart", JSON.stringify(cart));
@@ -187,7 +191,6 @@ function saveProduct(id) {
             return;
 
         } else {
-            console.log("aqui else");
             cart.push(product);
         }
 
