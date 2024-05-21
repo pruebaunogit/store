@@ -29,30 +29,6 @@ function registarUsuario(email, password, offers) {
     return { success: true, message: "Se registró con éxito." };
 }
 
-
-/* 
-
-function validateRegisterForm(event) {
-    event.preventDefault();
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const offers = document.getElementById("offers").checked;
-    if (password.length < 6) {
-        // alert("La contraseña debe tener al menos 6 caracteres.");
-        Swal.fire("La contraseña debe tener al menos 6 caracteres.", "", "warning");
-        return false;
-    }
-    const result = registarUsuario(email, password, offers);
-    if (result.success) {
-        // alert(result.message);
-        Swal.fire(result.message, "", "success");
-        window.location.href = "login.html";
-    } else {
-        // alert(result.message);
-        Swal.fire(result.message, "", "error");
-    }
-} */
-
 const selec_form_login = document.getElementById("loginForm");
 selec_form_login?.addEventListener("submit", (event)=>{ 
     event.preventDefault();
